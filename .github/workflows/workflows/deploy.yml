@@ -1,4 +1,4 @@
-name: Deploy Vite React App to GitHub Pages Nhlanhla
+name: Deploy Vite React App to GitHub Pages Nhlanhla!
 
 on:
   push:
