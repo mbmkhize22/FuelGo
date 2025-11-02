@@ -1,18 +1,12 @@
-name: Deploy Vite React App to GitHub Pages Nhlanhla!
+name: Deploy Vite React App to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # 🚀 Deploy every time you push to main
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  contents: write  # required to push to gh-pages
 
 jobs:
   build-and-deploy:
@@ -25,17 +19,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: "npm"
+          node-version: 22  # ✅ Recommended for latest Vite
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
 
       - name: Build project
         run: npm run build
-
-      - name: Verify build output exists
-        run: ls -la dist
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v4
