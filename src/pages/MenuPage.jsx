@@ -4,7 +4,7 @@ import './MenuPage.css';
 export default function MenuPage() {
   return (
     <div className="menu-page">
-      {/* Background video */}
+      {/* Background video  */}
       <video
         autoPlay
         loop
