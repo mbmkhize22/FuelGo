@@ -82,7 +82,6 @@ export default function RequestFuel() {
   // Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    //alert(`Fuel request submitted!\n\n${JSON.stringify(form, null, 2)}`);
     navigate("/client/confirmation", { state: { form } });
   };
 
@@ -98,69 +97,78 @@ export default function RequestFuel() {
 
       {/* Form */}
       <form className="fuel-form" onSubmit={handleSubmit}>
-        <label>
+        {/* Full Name */}
+        <div className="input-group">
           <input
             type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
-            placeholder="Full Name"
+            required
             readOnly
           />
-        </label>
+          <label className={form.name ? "filled" : ""}>Full Name</label>
+        </div>
 
-        <label>
+        {/* Phone Number */}
+        <div className="input-group">
           <input
             type="tel"
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            placeholder="Phone Number"
+            required
             readOnly
           />
-        </label>
+          <label className={form.phone ? "filled" : ""}>Phone Number</label>
+        </div>
 
-        <label className="address-field">
+        {/* Address */}
+        <div className="input-group">
           <input
             type="text"
             name="address"
             value={form.address}
             onChange={handleChange}
-            placeholder={
-              loadingLocation
-                ? "Fetching your current location..."
-                : "Delivery Address"
-            }
             required
           />
-          {loadingLocation && <span className="loading-text">📍 Locating...</span>}
-        </label>
+          <label className={form.address ? "filled" : ""}>
+            {loadingLocation ? "Fetching location..." : "Delivery Address"}
+          </label>
+        </div>
 
-        <label>
+        {/* Fuel Type */}
+        <div className="input-group select-group">
           <select
             name="fuelType"
             value={form.fuelType}
             onChange={handleChange}
+            required
           >
             <option value="Diesel">Diesel</option>
             <option value="Petrol">Petrol</option>
             <option value="LPG">LPG Gas</option>
           </select>
-        </label>
+          <label className="filled">Fuel Type</label>
+        </div>
 
-        <label>
+        {/* Quantity */}
+        <div className="input-group">
           <input
             type="number"
             name="quantity"
             value={form.quantity}
             onChange={handleChange}
-            placeholder="Quantity (Litres)"
             required
             min="1"
           />
-        </label>
+          <label className={form.quantity ? "filled" : ""}>
+            Quantity (Litres)
+          </label>
+        </div>
 
-        <label>
+        {/* Schedule */}
+        <div className="input-group">
           <input
             type="time"
             name="schedule"
@@ -168,7 +176,8 @@ export default function RequestFuel() {
             onChange={handleChange}
             required
           />
-        </label>
+          <label className="filled">Preferred Delivery Time</label>
+        </div>
 
         <button type="submit" className="submit-btn">
           Submit Request
