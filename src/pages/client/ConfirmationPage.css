@@ -113,4 +113,23 @@
       font-size: 0.9rem;
     }
   }
+
+    .paystack-button {
+      background: linear-gradient(135deg, #02c39a, #028090);
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1rem;
+      border-radius: 40px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+  
+    .paystack-button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #029e7f, #016d66);
+    }
   
