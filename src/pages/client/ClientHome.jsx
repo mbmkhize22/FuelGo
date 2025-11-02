@@ -113,7 +113,7 @@ export default function ClientHome() {
       {/* Floating Request Button */}
       <div className="floating-btn-container">
         <Link to="/client/request" className="floating-btn">
-          Request Fuel / Gas Test2
+          Request Fuel / Gas
         </Link>
       </div>
 
