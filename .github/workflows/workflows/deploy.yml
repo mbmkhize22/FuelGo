@@ -3,10 +3,11 @@ name: Deploy Vite React App to GitHub Pages
 on:
   push:
     branches:
-      - main  # 🚀 Deploy every time you push to main
+      - main
+  workflow_dispatch:  # 👈 allows manual trigger
 
 permissions:
-  contents: write  # required to push to gh-pages
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -19,11 +20,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22  # ✅ Recommended for latest Vite
-          cache: 'npm'
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
@@ -34,3 +35,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+          force_orphan: true
