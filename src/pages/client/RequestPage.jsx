@@ -1,102 +1,179 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./RequestFuel.css";
 
-const RequestPage = () => {
+export default function RequestFuel() {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    fuelType: '',
-    quantity: '',
-    deliveryTime: '',
+  // Simulate logged-in user (for demo)
+  const [user] = useState({
+    name: "Mondli Mkize",
+    phone: "+27 73 429 5463",
   });
 
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    fuelType: "Diesel",
+    quantity: "",
+    schedule: "",
+  });
+
+  const [loadingLocation, setLoadingLocation] = useState(false);
+
+  useEffect(() => {
+    // Autofill user info
+    setForm((f) => ({
+      ...f,
+      name: user.name,
+      phone: user.phone,
+    }));
+
+    // Fetch GPS & address on mount
+    getCurrentAddress();
+  }, [user]);
+
+  // Handle field changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Get location and reverse-geocode
+  const getCurrentAddress = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported on this device.");
+      return;
+    }
+
+    setLoadingLocation(true);
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        try {
+          const apiKey = "AIzaSyAcxTrBuAVb9ZRxkTHJ1EhfXA2dzVZMn34";
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
+          );
+          const data = await response.json();
+
+          if (data.results && data.results.length > 0) {
+            const formattedAddress = data.results[0].formatted_address;
+            setForm((f) => ({ ...f, address: formattedAddress }));
+          } else {
+            alert("Unable to retrieve address. Please type it manually.");
+          }
+        } catch (err) {
+          console.error("Geocoding failed", err);
+          alert("Error fetching address.");
+        } finally {
+          setLoadingLocation(false);
+        }
+      },
+      (err) => {
+        console.warn("GPS denied or failed:", err);
+        alert("Location permission denied. Please type your address manually.");
+        setLoadingLocation(false);
+      }
+    );
+  };
+
+  // Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('lastOrder', JSON.stringify(form));
-    navigate('/client/confirmation');
+    //alert(`Fuel request submitted!\n\n${JSON.stringify(form, null, 2)}`);
+    navigate("/client/confirmation", { state: { form } });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
-          Request Fuel Delivery
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="request-page">
+      {/* Header */}
+      <header className="header">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ←
+        </button>
+        <h2>Request Fuel Delivery</h2>
+      </header>
+
+      {/* Form */}
+      <form className="fuel-form" onSubmit={handleSubmit}>
+        <label>
           <input
             type="text"
             name="name"
-            placeholder="Full Name"
             value={form.name}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
-            required
+            placeholder="Full Name"
+            readOnly
           />
+        </label>
+
+        <label>
           <input
             type="tel"
             name="phone"
-            placeholder="Phone Number"
             value={form.phone}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
-            required
+            placeholder="Phone Number"
+            readOnly
           />
+        </label>
+
+        <label className="address-field">
           <input
             type="text"
             name="address"
-            placeholder="Delivery Address"
             value={form.address}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            placeholder={
+              loadingLocation
+                ? "Fetching your current location..."
+                : "Delivery Address"
+            }
             required
           />
+          {loadingLocation && <span className="loading-text">📍 Locating...</span>}
+        </label>
+
+        <label>
           <select
             name="fuelType"
             value={form.fuelType}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
-            required
           >
-            <option value="">Select Fuel Type</option>
-            <option value="Petrol">Petrol</option>
             <option value="Diesel">Diesel</option>
+            <option value="Petrol">Petrol</option>
             <option value="LPG">LPG Gas</option>
           </select>
+        </label>
+
+        <label>
           <input
             type="number"
             name="quantity"
-            placeholder="Quantity (Litres)"
             value={form.quantity}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            placeholder="Quantity (Litres)"
             required
+            min="1"
           />
+        </label>
+
+        <label>
           <input
             type="time"
-            name="deliveryTime"
-            value={form.deliveryTime}
+            name="schedule"
+            value={form.schedule}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
             required
           />
+        </label>
 
-          <button
-            type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600"
-          >
-            Submit Request
-          </button>
-        </form>
-      </div>
+        <button type="submit" className="submit-btn">
+          Submit Request
+        </button>
+      </form>
     </div>
   );
-};
-
-export default RequestPage;
+}

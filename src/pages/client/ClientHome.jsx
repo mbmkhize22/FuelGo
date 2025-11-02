@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   GoogleMap,
   LoadScript,
@@ -21,6 +21,8 @@ const mapOptions = {
 };
 
 export default function ClientHome() {
+  const navigate = useNavigate();
+
   const [orders] = useState([
     {
       id: 1,
@@ -108,7 +110,7 @@ export default function ClientHome() {
         </div>
       </div>
 
-      {/* Floating Button */}
+      {/* Floating Request Button */}
       <div className="floating-btn-container">
         <Link to="/client/request" className="floating-btn">
           Request Fuel / Gas
@@ -139,6 +141,17 @@ export default function ClientHome() {
           </ul>
         )}
       </section>
+
+      {/* Floating Bottom-Right Menu Button */}
+      {/* Floating Bottom-Right Home Button */}
+      <button
+        className="menu-fab"
+        onClick={() => navigate('/')}
+        title="Back to Home"
+      >
+        🏠
+      </button>
+
     </div>
   );
 }
