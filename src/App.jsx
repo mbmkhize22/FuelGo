@@ -17,6 +17,9 @@ import DeliveryList from './pages/driver/DeliveryList';
 import AdminHome from './pages/admin/AdminHome';
 import Dashboard from './pages/admin/Dashboard';
 
+// NOT FOUND
+import NotFound from './pages/NotFound';
+
 function App() {
   return (
     <Router>
@@ -40,9 +43,7 @@ function App() {
         {/* CATCH-ALL */}
         <Route
           path="*"
-          element={
-            <h1 className="text-center mt-10 text-2xl">404 - Not Found</h1>
-          }
+          element={<NotFound />}
         />
       </Routes>
     </Router>

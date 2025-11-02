@@ -46,7 +46,7 @@ export default function MenuPage() {
         </div>
 
         <footer className="menu-footer">
-          © {new Date().getFullYear()} FuelGo | Powered by Zamambo Telecoms
+          © {new Date().getFullYear()} FuelGo | Powered by DTMM
         </footer>
       </div>
     </div>

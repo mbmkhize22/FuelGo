@@ -1,0 +1,84 @@
+.notfound-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fafafa;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+.notfound-content {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px 30px;
+    max-width: 400px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.notfound-content h1 {
+    font-size: 5rem;
+    color: #ff6000;
+    margin: 0;
+    line-height: 1;
+}
+
+.notfound-content h2 {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    color: #333;
+}
+
+.notfound-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 15px 0 25px;
+}
+
+.home-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff8a00, #ff6000);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff7000, #ff4500);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .notfound-content {
+        padding: 30px 20px;
+    }
+
+    .notfound-content h1 {
+        font-size: 4rem;
+    }
+
+    .notfound-content h2 {
+        font-size: 1.2rem;
+    }
+}
