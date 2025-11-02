@@ -1,0 +1,166 @@
+.driver-page {
+    background: #fafafa;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .driver-header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 15px 10px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  .driver-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #222;
+    font-weight: 700;
+  }
+  
+  .driver-header p {
+    font-size: 0.95rem;
+    color: #666;
+  }
+  
+  /* Map Section */
+  .driver-map {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Delivery Section */
+  .driver-deliveries {
+    width: 90%;
+    max-width: 700px;
+    margin-top: 25px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .driver-deliveries h3 {
+    font-size: 1.2rem;
+    color: #222;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .delivery-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .delivery-card {
+    background: #fffdf9;
+    border-radius: 15px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s ease;
+  }
+  
+  .delivery-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .delivery-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .delivery-info .address {
+    margin: 2px 0 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .delivery-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .fuel {
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .status {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: capitalize;
+  }
+  
+  .status.in-progress {
+    color: #f39c12;
+  }
+  .status.pending {
+    color: #e67e22;
+  }
+  .status.delivered {
+    color: #27ae60;
+  }
+  
+  /* Floating Home Button */
+  .menu-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8a00, #ff6000);
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 128, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(255, 128, 0, 0.5);
+  }
+  
+  @media (max-width: 600px) {
+    .driver-map {
+      height: 40vh;
+    }
+  
+    .driver-deliveries {
+      width: 94%;
+      padding: 18px;
+    }
+  
+    .menu-fab {
+      width: 55px;
+      height: 55px;
+      bottom: 20px;
+      right: 20px;
+      font-size: 1.6rem;
+    }
+  }
+  
