@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // ✅ This must match your GitHub repo name
 export default defineConfig({
-  base: '/fuelgo/',  
+  base: '/FuelGo/',  
   plugins: [react()],
 })
