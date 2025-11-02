@@ -27,7 +27,7 @@ export default function ConfirmationPage() {
   const amountInKobo = totalAmount * 100; // Paystack uses kobo (ZAR * 100)
 
   const paystackProps = {
-    email: "demo@csbox.co.za", // You can replace with form.email if you add it later
+    email: "info@dtmm.co.za", // You can replace with form.email if you add it later
     amount: amountInKobo,
     publicKey,
     currency: "ZAR",
